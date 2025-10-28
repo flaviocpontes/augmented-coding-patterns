@@ -50,6 +50,11 @@ graph LR
   patterns/active-partner -->|solves| anti-patterns/flying-blind
   patterns/feedback-loop -->|solves| anti-patterns/flying-blind
   patterns/constrained-tests -->|solves| anti-patterns/flying-blind
+  patterns/habit-hooks -->|solves| obstacles/cannot-learn
+  patterns/habit-hooks -->|solves| obstacles/context-rot
+  patterns/reminder-hooks -->|solves| obstacles/cannot-learn
+  patterns/reminder-hooks -->|solves| obstacles/context-rot
+  patterns/reminder-hooks -->|solves| obstacles/compliance-bias
 
   %% Pattern → Pattern relationships (enables, uses, similar, alternative)
   patterns/reference-docs -->|enables| patterns/knowledge-composition
@@ -68,6 +73,7 @@ graph LR
   patterns/approved-fixtures -->|uses| patterns/feedback-loop
   patterns/approved-fixtures -->|uses| patterns/constrained-tests
   patterns/approved-logs -->|uses| patterns/constrained-tests
+  patterns/habit-hooks -->|uses| patterns/feedback-loop
   patterns/feedback-loop <-->|similar| patterns/playgrounds
   patterns/feedback-loop <-->|similar| patterns/chain-of-small-steps
   patterns/chain-of-small-steps <-->|similar| patterns/offload-deterministic
@@ -75,6 +81,7 @@ graph LR
   patterns/happy-to-delete <-->|similar| patterns/playgrounds
   patterns/approved-fixtures <-->|similar| patterns/check-alignment
   patterns/approved-fixtures <-->|similar| patterns/approved-logs
+  patterns/habit-hooks <-->|similar| patterns/reminder-hooks
 
   %% Anti-pattern → Obstacle relationships (causes)
   anti-patterns/distracted-agent -->|causes| obstacles/limited-focus

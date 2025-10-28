@@ -1,8 +1,8 @@
 ---
-authors: [ivett_ordog, lada_kesseler]
+authors: [ivett_ordog]
 ---
 
-# Hooks
+# Habit Hooks
 
 ## Problem
 Enforcing high coding standards without bloating AI's context with extensive style guides is challenging. Generic reminders either get forgotten as conversations progress or consume too much context when repeated constantly. You want AI to follow your specific coding practices, but explaining them repeatedly is inefficient and unreliable.
@@ -10,13 +10,9 @@ Enforcing high coding standards without bloating AI's context with extensive sty
 As Kent Beck said: "I'm not a great programmer, I'm a good programmer with great habits." The challenge is giving AI those same good habits.
 
 ## Pattern
-A habit is an action taken in response to a trigger. Build automated quality checks (using Claude Code hooks or Git hooks) that detect specific code quality violations and inject targeted guidance exactly when needed:
+A habit is an action taken in response to a trigger. To simulate this, we use **deterministic** scripts that detect triggers (for example quality violations) and provide **actionable** prompts.
 
-1. **Set up automated detectors** for quality violations you care about (duplication, code smells, file size, linting issues, etc.)
-2. **Create specific, actionable prompts** for each detector that tell AI exactly what to do
-3. **Configure hooks to block AI from proceeding** until issues are addressed
-4. **Allow snoozing violations per file** until the file changes again (useful when introducing new checks)
-5. **Require human approval for disabling checks** to prevent AI from over-using snooze functionality
+Optionally habit hooks can be blocking (for example the pre-commit hook can prevent commits until the triggers are resolved) and may have a snooze feature that the human can use to ignore false positives.
 
 This approach reduces context bloat while improving compliance by providing precise, relevant guidance exactly when violations occur, rather than front-loading massive instructions that AI forgets or misapplies.
 
@@ -48,10 +44,6 @@ This approach reduces context bloat while improving compliance by providing prec
 - Trigger: Linting violations detected
 - Prompt: "Run `npm run lint:fix` to automatically fix many of these issues. Manual fixes may be needed for logical errors."
 
-**Single-Use Variable**
-- Trigger: Variable declared and used only once
-- Prompt: "Variable 'variableName' is declared and used only once - consider inlining."
-
 **Dead Code Detector**
 - Trigger: Unused methods/functions detected
 - Prompt: "Remove these unused methods to maintain codebase clarity."
@@ -60,19 +52,12 @@ This approach reduces context bloat while improving compliance by providing prec
 Some behaviors are almost impossible to get AI to stop doing reliably because their whole training contradicts it. For example,  reliably getting it to stop commenting code. It's easier to let it add the comment and have an auto-detecting hook provide it feedback to take the comment out.
 - Trigger: using tools Write|Edit|MultiEdit
 - Prompt: Do not write code comments, prefer expressive self-documenting names and code
-  
-**User Reminders Hook**
-- Trigger: On user prompt submit (every message)
-- Prompt: Inject your most critical preferences automatically (for example, after every user message)
-- Example of injected messages: "Be honest, not flattering. Tell me what I need to know even if I don't want to hear it" or "Exercise full agency to push back on mistakes, flag issues early, ask questions instead of choosing randomly"
-Note: Limit to 5 reminders maximum to avoid context rot
 
 ### Implementation Tips
 
 AI can generally create these hooks with minimal prompting. The key is:
 - **Specificity**: Each prompt should be actionable and specific to the violation
 - **Context efficiency**: Inject guidance only when needed, not upfront
-- **Escape hatch with oversight**: Allow snoozing, but require human approval to prevent abuse
 - **Treat as user prompts**: Include guidance in your agent file to treat these prompts as user prompts
 
 A hack that tends to work well is including a 🙂💬 emoji pair in the generated prompts, and mentioning their meaning in the agent file as CRITICAL.

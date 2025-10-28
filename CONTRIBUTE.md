@@ -97,3 +97,10 @@ Add relationships to `documents/relationships.mmd`:
 
 ### 6. Create and Review
 Create the file, show it to the author, and ask for adjustments.
+
+---
+
+## In case duplicates are found:
+
+You may suggest changes to existing documents but make sure to **respect** the original author's intent. 
+**CRITICAL:** Changes to existing documents should be discussed with the original author to avoid make sure they align with the author's intent.
