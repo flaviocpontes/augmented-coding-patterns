@@ -34,10 +34,26 @@ export default function TalkPage() {
 
   return (
     <div>
+      <div style={{ padding: '2rem 2rem 1rem', textAlign: 'center' }}>
+        <h1>Augmented Coding: Mapping the Uncharted Territory</h1>
+      </div>
       <PatternMap
         patternDataByNumber={patternDataByNumber}
         patternDataByLabel={patternDataByLabel}
       />
+      <div style={{ padding: '1rem 2rem 2rem', textAlign: 'center' }}>
+        <p>
+          Explore the interactive map above, or{' '}
+          <a
+            href="https://www.youtube.com/watch?v=_LSK2bVf0Lc&t=5301s"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            watch the guided walkthrough
+          </a>
+          {' '}on YouTube.
+        </p>
+      </div>
     </div>
   );
 }
