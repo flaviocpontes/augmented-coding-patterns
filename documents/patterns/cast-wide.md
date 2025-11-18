@@ -2,7 +2,7 @@
 authors: [lada_kesseler]
 ---
 
-# Cast Wide (Pattern)
+# Cast Wide
 
 ## Problem
 Don't settle for your first solution. Actively push AI to show you more alternatives.
